@@ -5,21 +5,14 @@ int c;  char *p, o[] = "+-*/^ ";
 
 ExpressionClass::ExpressionClass() {
 }
-ExpressionClass::exec_expression(String line) {
-  String method = "exec_expression";
-  info(method, "input string=[" + line + "]");
 
-  int calc_result = 0;
+int ExpressionClass::expression(String line, double *v)
+{
   const char* s = line.c_str();
-  int result = expression(s, &calc_result);
-  if (result == true) {
-    info(method, "calc_result=[" + String(calc_result) + "]");
-  } else {
-    error(method, "error_result=[" + String(result) + "]");
-  }
+  return expression(s, v);
 }
 
-int ExpressionClass::expression(const char *s, int *v)
+int ExpressionClass::expression(const char *s, double *v)
 {
   p = (char *)s;
   *v = expr(o);
@@ -28,7 +21,6 @@ int ExpressionClass::expression(const char *s, int *v)
 
 int ExpressionClass::get(void) {
   String method = "  get";
-
   do {
     c = *p++ & 0xff;
   } while (isspace(c));
@@ -79,12 +71,7 @@ double ExpressionClass::expr(const char *s)
   debug(method, "return v=[" + String(v) + "]");
   return v;
 }
-void ExpressionClass::info(String method,String message){
-    Serial.println("INFO  | " + method + ":" + message);
-}
-void ExpressionClass::error(String method,String message){
-    Serial.println("ERROR | " + method + ":" + message);
-}
+
 void ExpressionClass::debug(String method,String message){
     //Serial.println("DEBUG | " + method + ":" + message);
 }

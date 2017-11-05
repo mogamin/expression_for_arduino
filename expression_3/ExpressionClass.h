@@ -6,13 +6,11 @@
 class ExpressionClass {
   public:
     ExpressionClass();
-    exec_expression(String line);
+    int expression(const char *s, double *v);
+    int expression(String line, double *v);
   private:
-    int expression(const char *s, int *v);
     int get(void);
     double expr(const char *s);
-    void info(String method,String message);
-    void error(String method,String message);
     void debug(String method,String message);
 };
 
